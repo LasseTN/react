@@ -7,37 +7,53 @@ function App() {
   const [role, setRole] = useState('dev');
   const [employees, setEmployees] = useState([
       {
+        id: 1,
         name: "Bilbo", 
         role: "Developer", 
         img: "https://images.pexels.com/photos/2743754/pexels-photo-2743754.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
       {
+        id: 2,
         name: "Winther", 
         role: "Manager", 
         img: "https://images.pexels.com/photos/3586798/pexels-photo-3586798.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
       {
+        id: 3,
         name: "Tim", 
         role: "Director of Eng.", 
         img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
       {
+        id: 4,
         name: "John", 
         role: "Software Engineer", 
         img: "https://images.pexels.com/photos/14697557/pexels-photo-14697557.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
       {
+        id: 5,
         name: "Lawrence", 
         role: "The DevOps Guy", 
         img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
       {
+        id: 6,
         name: "Bobby", 
         role: "Senior", 
         img: "https://images.pexels.com/photos/2232981/pexels-photo-2232981.jpeg?auto=compress&cs=tinysrgb&w=1600" 
       },
-    ]
-  )
+    ]);
+
+    function UpdateEmployee(id, newName, newRole) {
+      const updatedEmployees = employees.map((employee) => {
+        if (id == employee.id) {
+          return {...employee, name: newName, role: newRole}
+        }
+        return employee;
+      });
+      setEmployees(updatedEmployees);
+
+    }
   const showEmployees = true;
   return (
       <div className="App">
@@ -52,16 +68,17 @@ function App() {
                   />
                   <div className="flex flex-wrap justify-center">
                   {employees.map((employee) => {
-                    console.log(uuidv4());
                       return (
                       <Employee 
-                          key={uuidv4()}
+                          key={employee.id}
+                          id={employee.id}
                           name={employee.name} 
                           role={employee.role} 
                           img={employee.img} 
+                          UpdateEmployee={UpdateEmployee}
                       />
                   );
-                  })}
+              })}
                   </div>
               </>
           ) : (
