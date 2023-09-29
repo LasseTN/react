@@ -2,6 +2,8 @@ import './index.css';
 import Employee from './components/Employee';
 import { useState } from 'react';
 import { v4 as uuidv4} from 'uuid';
+import EditEmployee from './components/EditEmployee';
+import AddEmployee from './components/AddEmployee';
 
 function App() {
   const [role, setRole] = useState('dev');
@@ -52,8 +54,18 @@ function App() {
         return employee;
       });
       setEmployees(updatedEmployees);
-
     }
+
+    function newEmployee(name, role, img) {
+      const newEmployee = {
+        id: uuidv4(),
+        name: name,
+        role: role,
+        img: img,
+      }
+      setEmployees([...employees, newEmployee])
+    }
+
   const showEmployees = true;
   return (
       <div className="App">
@@ -62,7 +74,6 @@ function App() {
                 <input 
                     type='text'
                     onChange={(e) => {
-                        console.log(e.target.value);
                         setRole(e.target.value);
                     }}
                   />
@@ -75,11 +86,12 @@ function App() {
                           name={employee.name} 
                           role={employee.role} 
                           img={employee.img} 
-                          UpdateEmployee={UpdateEmployee}
+                          updateEmployee={UpdateEmployee}
                       />
                   );
               })}
                   </div>
+                  <AddEmployee newEmployee={newEmployee} />
               </>
           ) : (
               <p>You cannot see the employees</p>
