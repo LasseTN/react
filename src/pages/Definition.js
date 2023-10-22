@@ -6,7 +6,7 @@ import DefinitionSearch from '../components/DefinitionSearch';
 export default function Definition() {
     const [word, setWord] = useState(); 
     const [notFound, setNotFound] = useState(false);
-const [error, setError] = useState(false);
+    const [error, setError] = useState(false);
 
     let { search } = useParams();
     const navigate = useNavigate();
